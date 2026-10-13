@@ -3,10 +3,12 @@ import requests
 import pandas as pd
 
 # ========== 配置 ==========
-APP_ID = "cli_aaaa63af823a9ce3"
-APP_SECRET = "yljUK3LoJCy4xznQRq9LMbuyd6fBnfv2"
-WIKI_NODE_TOKEN = "BaYRwuHQqivQNskYqA6cGihLnhg"  # 从Wiki链接中截取的节点token
-
+APP_ID = os.environ.get("FEISHU_APP_ID", "cli_aaaa63af823a9ce3")
+APP_SECRET = os.environ.get("FEISHU_APP_SECRET")
+WIKI_NODE_TOKEN = os.environ.get("FEISHU_WIKI_NODE_TOKEN", "BaYRwuHQqivQNskYqA6cGihLnhg")  # 从Wiki链接中截取的节点token
+ 
+if not APP_SECRET:
+    raise RuntimeError("未设置环境变量 FEISHU_APP_SECRET，请先设置后再运行")
 
 # ========== 飞书API相关函数 ==========
 
